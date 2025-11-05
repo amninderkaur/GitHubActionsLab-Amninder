@@ -1,0 +1,45 @@
+name: Multi-Platform Testing
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  test-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print OS info
+        run: uname -a
+      
+      - name: Create and read a file
+        run: |
+          echo "This is Ubuntu" > os_info.txt
+          cat os_info.txt
+
+  test-on-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Print OS info
+        run: systeminfo
+      - name: Create and read a file
+        run: |
+          echo This is Windows > os_info.txt
+          type os_info.txt
+
+  test-on-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Print OS info
+        run: sw_vers
+      - name: Create and read a file
+        run: |
+          echo "This is macOS" > os_info.txt
+          cat os_info.txt
